@@ -26,7 +26,10 @@ def base_driver(drv_url, service_type, options):
     else:
         pass
 
-    driver = webdriver.Remote(service_param, options=chr_opt)
+    try:
+        driver = webdriver.Remote(service_param, options=chr_opt)
+    except Exception as e:
+        logger.error(e)
 
     return driver    
 

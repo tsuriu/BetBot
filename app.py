@@ -1,4 +1,5 @@
 from rocketry import Rocketry
+from loguru import logger
 
 from src.histParser import init_scrapper
 from src.modules.misc import getDuration, save_data
@@ -10,6 +11,7 @@ def run(data):
     results = init_scrapper(data["endpoint"], data["lookup_class"])
     save_data(results, "b_id", data["endpoint"])
 
+
 @app.task("every 2 hours")
 def main():
     games_endpoint = [{"endpoint":"doubles", "lookup_class":"double-single"},{"endpoint":"crashes", "lookup_class":"crash-single"}]
@@ -18,8 +20,11 @@ def main():
         try:
             run(game)
         except Exception as e:
-            print(e)
+            logger.error(e)
 
 
 if __name__ == "__main__":
-    app.run()
+    try:
+        app.run()
+    except Exception as e:
+        logger.error(e)

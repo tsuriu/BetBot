@@ -70,7 +70,7 @@ def getDuration(then, now = datetime.now(), interval = "default"):
 
 
 def save_data(data, b_key, b_name):
-    db_path = "./"
+    db_path = "./data/"
 
     for k in unique(data, "date"):
         db_name = ((k.split(" "))[0]).replace("/","_")

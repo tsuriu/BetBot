@@ -1,4 +1,3 @@
-from unittest import result
 from bs4 import BeautifulSoup
 from .misc import str2float, datetime_formater, time_formater
 

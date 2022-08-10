@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+import os
 
 from .modules.misc import datetime_formater
 from .modules.scrapper_utils import double_element_parser
@@ -6,15 +7,12 @@ from .modules.scrapper_base import base_driver, kill_driver
 
 
 def init_scrapper(endpoint=None, lookup_class=None):
-
-    DOUBLE_HISTORY_URL = "https://www.historicosblaze.com/br/blaze/{}"
-
-    srvurl = "http://127.0.0.1:4444/wd/hub"
-    options = "headless,no-sandbox,disable-dev-shm-usage,log-level=1,disable-gpu"
-    service_type = "remote"
+    srvurl = os.environ.get("SELENIUM_URL")
+    options = os.environ.get("SELENIUM_BROWSER_OP")
+    service_type = os.environ.get("SELENIUM_SRV_TYPE")
 
     driver = base_driver(srvurl, service_type, options)
-    driver.get(DOUBLE_HISTORY_URL.format(endpoint))
+    driver.get("".format(os.environ.get("HISTORY_BASE_URL"),endpoint))
 
     elements = driver.find_elements(By.CLASS_NAME, lookup_class)
 

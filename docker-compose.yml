@@ -1,7 +1,8 @@
 version: '3'
 services:
-  chrome:
+  selenium-browser:
     image: selenium/node-chrome:4.3.0-20220706
+    container_name: selenium-browser
     shm_size: 2gb
     depends_on:
       - selenium-hub
@@ -17,3 +18,20 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+
+  scrapper:
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    container_name: blaze_history_scrapper
+    links:
+      - selenium-hub:hub
+    depends_on: 
+      - selenium-hub
+    volumes:
+      - ./data/:/app/data/
+    env_file:
+      - .scrapper_env
+    restart: always
+
+  

@@ -4,23 +4,7 @@ from pysondb import db
 class database:
     def __init__(self, dbpath):
         self.Db = db.getDb(dbpath)
-
-
-    def __call_method__(self, m, p):
-        try:
-            ret = getattr(self, '.'.join(["Db",m]))(p)
-
-            if p is None:
-                ret = getattr(self, '.'.join(["Db",m]))
-
-            
-        except Exception as e:
-            ret = e
-
-        print(type(ret))
         
-        return ret
-
 
     def get(self, param=None):
         if param is None:

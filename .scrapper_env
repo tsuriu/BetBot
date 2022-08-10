@@ -1,0 +1,4 @@
+HISTORY_BASE_URL=https://www.historicosblaze.com/blaze/
+SELENIUM_URL=http://hub:4444/wd/hub
+SELENIUM_SRV_TYPE=remote
+SELENIUM_BROWSER_OP="headless,no-sandbox,disable-dev-shm-usage,log-level=1,disable-gpu"
